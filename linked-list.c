@@ -11,7 +11,7 @@ void create(void);
 void insertb(void);
 void display(void);
 int main()
-{
+{//not completed. will update it later
 	int ch, c;
 	i=0;
 	head=NULL;
