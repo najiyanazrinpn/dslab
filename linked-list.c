@@ -140,6 +140,7 @@ void insertp()
 			}
 			n->next = pre->next;
 			pre->next = n;
+			i++;
 		}
 	}
 }
