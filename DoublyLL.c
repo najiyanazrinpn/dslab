@@ -8,11 +8,11 @@ struct node
 };
 struct node *head, *tail, *n;
 void insertb(void);
-void inserte(void);
 void insertp(void);
+void inserte(void);
 void deleteb(void);
-void deletee(void);
 void deletep(void);
+void deletee(void);
 void search(void);
 int size(void);
 void display(void);
@@ -53,7 +53,7 @@ int main()
 						default: printf("\nInvalid choice!!!");
 					}
 				break;
-			// case 3: search();break;
+			case 3: search();break;
 			case 4: display(); break;
 			case 5: printf("\nExiting..."); break;
 			default: printf("\nIvalid choice!!!");
@@ -191,6 +191,27 @@ void deletee()
 		free(temp);
 	}
 }
+void search()
+{
+	int x, i=1, f=0;
+	struct node *temp;
+	temp = head;
+	printf("\nEnter the element to be searched: ");
+	scanf("%d",&x);
+	while(temp!=NULL)
+	{
+		if(temp->val==x)
+		{
+			printf("\nElement %d found at the position %d",x,i);
+			f=1;
+		}
+		temp=temp->next;
+		i++;
+	}
+	if(f==0)
+		printf("\nElement %d not found",x);
+
+}
 void display()
 {
 	struct node *temp;
@@ -201,13 +222,7 @@ void display()
 		printf("%d->",temp->val);
 		temp = temp->next;
 	}
-	printf("NULL\n");
-	temp = tail;
-	while(temp!=NULL)
-	{
-		printf("%d\t",temp->val);
-		temp = temp->prev;
-	}
+	printf("NULL");
 }
 int size()
 {
