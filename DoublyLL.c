@@ -25,7 +25,7 @@ int main()
 	printf("\nBefore operation your doubly linked list is:\nhead->NULL\ntail->NULL");
 	do
 	{
-		printf("\n1.Insertion\t2.Deletion\t3.Search\t4.Display\t5.Exit\nEnter your choice: ");
+		printf("\n\n1.Insertion\t2.Deletion\t3.Search\t4.Display\t5.Exit\nEnter your choice: ");
 		scanf("%d",&ch);
 		switch(ch)
 		{
@@ -42,15 +42,20 @@ int main()
 				}
 				break;
 			case 2:
-					printf("\n1.At the beginning\t2.At a specific position\t3.At the end\t4.Exit\nEnter your choice: ");
-					scanf("%d",&c);
-					switch(c)
+					if(head == NULL)
+						printf("\nDeletion not possible!!!");
+					else
 					{
-						case 1: deleteb(); break;
-						case 2: deletep(); break;
-						case 3: deletee(); break;
-						case 4: break;
-						default: printf("\nInvalid choice!!!");
+						printf("\n1.At the beginning\t2.At a specific position\t3.At the end\t4.Exit\nEnter your choice: ");
+						scanf("%d",&c);
+						switch(c)
+						{
+							case 1: deleteb(); break;
+							case 2: deletep(); break;
+							case 3: deletee(); break;
+							case 4: break;
+							default: printf("\nInvalid choice!!!");
+						}
 					}
 				break;
 			case 3: search();break;
@@ -126,9 +131,7 @@ void inserte()
 }
 void deleteb()
 {
-	if(head == NULL)
-		printf("\nDeletion not possible!!!");
-	else if (head==tail)
+	if (head==tail)
 	{
 		printf("\n%d deleted",head->val);
 		free(head);
@@ -152,8 +155,8 @@ void deletep()
 	struct node *temp;
 	printf("\nEnter the position of the element to be deleted: ");
 	scanf("%d",&pos);
-	if((head == NULL)||(pos<1)||(pos>sz))
-		printf("\nDeletion not possible!!!");
+	if((pos<1)||(pos>sz))
+		printf("\nInvalid position!!!");
 	else if(pos==1)
 		deleteb();
 	else if(pos==sz)
@@ -167,14 +170,13 @@ void deletep()
 		}
 		(temp->prev)->next = temp->next;
 		(temp->next)->prev = temp->prev;
+		printf("\n%d deleted",temp->val);
 		free(temp);
 	}
 }
 void deletee()
 {
-	if(head == NULL)
-		printf("\nDeletion not possible!!!");
-	else if (head==tail)
+	if (head==tail)
 	{
 		printf("\n%d deleted",head->val);
 		free(head);
