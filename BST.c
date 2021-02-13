@@ -9,7 +9,7 @@ struct node
 struct node *root, *n, *temp;
 struct node* insertx(struct node* root, int x);
 struct node* deletex(struct node* root, int x);
-struct node* searchx(struct node* root, int x);
+int searchx(struct node* root, int x);
 void display(struct node*);
 void main()
 {
@@ -34,14 +34,22 @@ void main()
 					{
 						printf("\nEnter the element to be deleted: ");
 						scanf("%d",&x);
-						printf("\nDelete %d",x);
-						root = deletex(root,x);
+						if(searchx(root,x)==1)
+						{
+							printf("\nDelete %d",x);
+							root = deletex(root,x);
+						}
+						else
+							printf("\nElement doesn't exist!!!");
 					}
 					break;
 			case 3: 
 					printf("\nEnter the element to be searched: ");
 					scanf("%d",&x);
-					root = searchx(root,x);
+					if(searchx(root,x)==1)
+						printf("\n%d found",x);
+					else
+						printf("\n%d doesn't exist",x);
 					break;
 			case 4: if(root==NULL)
 						printf("Tree is NULL");
@@ -110,18 +118,18 @@ struct node* deletex(struct node* root, int x)
 	}
 	return root;
 }
-struct node* searchx(struct node* root, int x)
+int searchx(struct node* root, int x) 
 {
-	if(root==NULL)
-		printf("\nThe element doesn't exist!!!");
-	else if(x==root->val)
-		printf("\n%d found.",x);
-	else
-		if(x < root->val)
-			root->left = searchx(root->left,x);
+	while (root != NULL)
+	{
+		if (x > root->val)
+			root = root->right;
+		else if (x < root->val)
+			root = root->left;
 		else
-			root->right = searchx(root->right,x);
-	return(root);
+			return 1;
+	}
+	return 0;
 }
 void display(struct node* root)
 {
